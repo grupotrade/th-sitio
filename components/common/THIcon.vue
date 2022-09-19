@@ -1,10 +1,10 @@
 <template>
-<img class="THLogo" alt="Trade House" :src="$vuetify.theme.dark || dark ? '/THLogo_dark.svg' : '/THLogo.svg'">
+<img class="THIcon" alt="Trade House" :src="$vuetify.theme.dark || dark ? '/THIcon_dark.svg' : '/THIcon.svg'">
 </template>
 
 <script>
 export default {
-    name: 'logo-th',
+    name: 'icon-th',
     props: {
         dark: {
             type: Boolean,
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style>
-.THLogo {
-    width: 180px;
+.THIcon {
+    width: 50px;
 }
 </style>

@@ -1,38 +1,38 @@
 <template>
-<v-container class="fill-height">
-    <v-row align="center" justify="center" dense>
-        <v-col cols="12" sm="8" md="4" align="center">
-            <v-card  class="elevation-4 text-center" color="white" light tile>
-                <v-card-text class="px-8 pb-4">
-                    <img src="/THLogo.svg" width="250" class="mt-4">
-                    <h3 class="primary--text mb-8 mt-4">Bienvenidos</h3>
-                    <v-form>
-                        <v-text-field label="Email" outlined color="primary" name="login" prepend-inner-icon="mdi-account" type="text" v-model="auth.email"></v-text-field>
-                        <v-text-field label="Contraseña" outlined color="primary" name="password" prepend-inner-icon="mdi-lock" type="password" v-model="auth.password"></v-text-field>
-                        <v-btn color="primary" @click="login" depressed large block>Entrar</v-btn>
-                    </v-form>
-                    <v-btn color="primary" class="my-4" text @click="forgotPassword" small>¿Olvidaste tu contraseña?</v-btn>
-                    <p class="mb-0">¿No tenés código de acceso?</p>
-                    <v-btn color="black" text @click="$router.push('/register')" depressed small>
-                        Pedilo aquí</v-btn>
-                </v-card-text>
+<v-dialog v-model="show" width="550px">
+    <v-card class="text-center" color="white" flat light tile>
+        <v-card-text class="px-8 pb-4">
+            <CommonTHLogo class="ma-4" />
+            <v-form>
+                <v-text-field label="Email" outlined color="primary" name="login" prepend-inner-icon="mdi-account" type="text" v-model="auth.email"></v-text-field>
+                <v-text-field label="Contraseña" outlined color="primary" name="password" prepend-inner-icon="mdi-lock" type="password" v-model="auth.password"></v-text-field>
+                <v-btn color="primary" @click="login" depressed large block>Entrar</v-btn>
+            </v-form>
+            <v-btn color="primary" class="my-4" text @click="forgotPassword" small>¿Olvidaste tu contraseña?</v-btn>
+            <p class="mb-0">¿No tenés código de acceso?</p>
+            <v-btn color="black" text @click="openRegister" depressed small>
+                Pedilo aquí</v-btn>
+        </v-card-text>
 
-            </v-card>
-            <v-sheet color="transparent" class="mt-6 login-logos">
-                <img src="/THLogo_dark.svg" width="150" /> <span class="body-2 secondary_text_dark--text">by</span> <img src="/TDLogo_dark.svg" width="150" />
-            </v-sheet>
-            <v-snackbar :timeout="4000" v-model="snackbar" absolute bottom center>
-                {{ snackbarText }}
-            </v-snackbar>
-        </v-col>
-    </v-row>
-</v-container>
+    </v-card>
+    <v-snackbar :timeout="4000" v-model="snackbar" absolute bottom center>
+        {{ snackbarText }}
+    </v-snackbar>
+
+</v-dialog>
 </template>
 
 <script>
 export default {
-    layout: 'clean',
-    middleware: 'noauth',
+    name: 'loginDialog',
+    props: {
+        value: {
+            type: Boolean
+        },
+    },
+    model: {
+        event: `modified`
+    },
     data() {
         return {
             snackbar: false,
@@ -43,21 +43,31 @@ export default {
             }
         }
     },
+    computed: {
+        show: {
+            get() {
+                return this.value;
+            },
+            set(val) {
+                this.$emit("modified", val);
+            }
+        }
+    },
     methods: {
-     async login() {
+        async login() {
             this.loading = true
             const payload = {
                 email: this.auth.email,
                 password: this.auth.password
             }
-           await this.$store.dispatch('auth/signInWithEmailAndPassword', payload).then(
+            await this.$store.dispatch('auth/signInWithEmailAndPassword', payload).then(
                 result => {
                     this.$snackbar.show({
                         text: result,
                         color: 'success'
                     })
                     this.loading = false
-                    this.$router.push('/')
+                    this.show = false
                     this.$fire.analytics.logEvent("login", 1);
                 }, error => {
                     this.loading = false
@@ -71,7 +81,7 @@ export default {
             let that = this
             this.$fire.auth.sendPasswordResetEmail(this.auth.email)
                 .then(function () {
-                    that.snackbarText = 'reset link sent to ' + that.auth.email
+                    that.snackbarText = 'Revise su casilla de email' + that.auth.email + '.'
                     that.snackbar = true
                 })
                 .catch(function (error) {
@@ -79,6 +89,9 @@ export default {
                     that.snackbar = true
                 })
         },
+        openRegister() {
+            this.$emit('openRegister')
+        }
     }
 }
 </script>

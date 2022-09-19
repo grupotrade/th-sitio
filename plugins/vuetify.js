@@ -33,7 +33,7 @@ export default ctx => {
           primary_lighten_hover: '#FED4C3',
           primary_lighten: '#FDE7DE',
           secondary_darken: '#0E63F1',
-          secondary: '#4285F4',
+          secondary: '#36a7df',
           secondary_hover: '#5C99FF',
           secondary_active: '#9FC1F9',
           secondary_lighten_hover: '#CFE0FC',

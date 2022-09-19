@@ -1,8 +1,6 @@
 <template>
-<v-container class="fill-height">
-    <v-row align="center" justify="center" dense>
-        <v-col cols="12" sm="8" md="5" align="center">
-            <v-card class="elevation-4 text-center" color="white" light tile>
+<v-dialog v-model="show" width="550px">
+    <v-card class="text-center" color="white" flat light tile>
                 <v-card-text class="px-8 pb-4">
                     <img src="/THLogo.svg" width="250" class="mt-4">
                     <h3 class="primary--text mb-8 mt-4">Registrate</h3>
@@ -49,40 +47,40 @@
                         </v-row>
                         <v-btn color="primary" type="submit" :disabled="!validRegister" depressed large block>Enviar</v-btn>
                     </v-form>
-                    <v-btn color="black" class="mt-5" text @click="$router.push('/login')" depressed small>
-                        Volver</v-btn>
+                    <v-btn color="black" class="mt-5" text @click="show = false" depressed small>
+                        Cerrar</v-btn>
                 </v-card-text>
             </v-card>
-            <v-sheet color="transparent" class="mt-6 login-logos">
-                <img src="/THLogo_dark.svg" width="150" /> <span class="body-2 secondary_text_dark--text">by</span> <img src="/TDLogo_dark.svg" width="150" />
-            </v-sheet>
             <v-snackbar :timeout="4000" v-model="snackbar" absolute bottom center>
                 {{ snackbarText }}
             </v-snackbar>
-        </v-col>
-    </v-row>
-</v-container>
+</v-dialog>
 </template>
 
 <script>
 export default {
-    layout: 'clean',
-    middleware: 'noauth',
+    name: 'registerDialog',
+    props: {
+        value: {
+            type: Boolean
+        },
+    },
+    model: {
+        event: `modified`
+    },
     data() {
         return {
-            snackbar: false,
-            snackbarText: 'No error message',
             form: {
-                name: 'Produccion',
-                lastname: 'Admin',
-                password: 'Trade2022$',
-                group: 'TD',
-                group_code: 'TD',
-                state: 'CABA',
-                city: 'CABA',
-                password_confirmation: 'Trade2022$',
-                email: 'produccion@trade-design.com.ar',
-                email_repeat: 'produccion@trade-design.com.ar'
+                name: '',
+                lastname: '',
+                password: '',
+                group: '',
+                group_code: '',
+                state: '',
+                city: '',
+                password_confirmation: '',
+                email: '',
+                email_repeat: ''
             },
             showPass: false,
             validRegister: false,
@@ -402,6 +400,16 @@ export default {
 
         }
     },
+    computed: {
+        show: {
+            get() {
+                return this.value;
+            },
+            set(val) {
+                this.$emit("modified", val);
+            }
+        }
+    },
     methods: {
         onSubmitRegister() {
             const payload = {
@@ -418,7 +426,7 @@ export default {
                             duration: 1500
                         })
                         setTimeout(() => {
-                    location.replace('/login')
+                    this.show = false
                 }, 1500)
                     
 
@@ -432,11 +440,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.login-logos img,
-.login-logos span {
-    opacity: .5;
-    vertical-align: middle;
-}
-</style>

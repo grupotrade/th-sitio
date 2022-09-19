@@ -17,7 +17,7 @@ export const actions = {
                     if (doc.exists) {
                         const data = doc.data()
                         if (!data.enable) {
-                            reject("No autorizado")
+                            reject("Su cuenta no ha sido autorizada.")
                         } else {
                                 collection.doc(user.uid).update({
                                     token: user.refreshToken
@@ -51,14 +51,14 @@ export const actions = {
                         });                        
                     }
                 }).catch((error) => {
-                    console.log("Error getting document:", error);
+                    console.log("Error usuario no encontrado.", error);
                 });
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode + errorMessage)
-                reject("Error de autenticación")
+                reject("Usuario o contraseña incorrectos.")
             });
         })
     }

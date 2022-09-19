@@ -22,7 +22,7 @@ export default {
         alt: {
             type: String,
             required: false,
-            default: null
+            default: 'Visitante Anónimo'
         },
         size: {
             type: String,

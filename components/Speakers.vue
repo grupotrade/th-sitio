@@ -336,6 +336,6 @@
 
 <style scoped>
 .v-avatar { 
-    z-index: 100;
+    z-index: 1;
 }
 </style>
