@@ -127,7 +127,7 @@
                             <v-container>
                                 <v-row class="pt-1">
                                     <v-col cols="12" md="10" class="pa-0">
-                                        <h5>Espacio Promocional ANNAR.</h5>
+                                        <h5>Espacio Promocional.</h5>
                                         <v-chip pill color="primary--text btn-color" href="/conferencias/sala1">Sala 1</v-chip>
                                     </v-col>
                                     <v-col cols="12" md="2" class="pa-0">
@@ -257,7 +257,7 @@
                             <v-container>
                                 <v-row class="pt-1">
                                     <v-col cols="12" md="10" class="pa-0">
-                                        <h5>Espacio Promocional ANNAR.</h5>
+                                        <h5>Espacio Promocional.</h5>
                                         <v-chip pill color="primary--text btn-color" href="/conferencias/sala1">Sala 1</v-chip>
                                     </v-col>
                                     <v-col cols="12" md="2" class="pa-0">

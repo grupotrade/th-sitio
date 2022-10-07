@@ -51,9 +51,6 @@
                         Cerrar</v-btn>
                 </v-card-text>
             </v-card>
-            <v-snackbar :timeout="4000" v-model="snackbar" absolute bottom center>
-                {{ snackbarText }}
-            </v-snackbar>
 </v-dialog>
 </template>
 

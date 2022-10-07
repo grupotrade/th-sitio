@@ -302,8 +302,6 @@
                             </h5>
                             <p>Bacterióloga
                                 <br />
-                                ANNAR
-                                <br />
                                 <v-btn text color="primary" class="mt-3 px-2 btn-color" href="https://www.linkedin.com/in/magda-milena-romero-rios-082947125/" target="_blank">
                                     <font-awesome-icon :icon="['fab', 'linkedin']" class="primary--text mr-2" size="lg" />Ver perfil
                                 </v-btn>

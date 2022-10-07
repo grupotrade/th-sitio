@@ -1,7 +1,8 @@
 <template>
 <v-app>
     <v-navigation-drawer v-model="menuMobile" dark color="primary" clipped app disable-resize-watcher>
-        <CommonTHLogo dark class="ma-6" />
+        <CommonTHLogo dark class="ma-16"  v-if="false"/>
+        <img src="/img/Logo_COA.png" width="180" class="ma-16"/>
         <v-list>
             <v-list-item exact>
                 <v-list-item-content to="/">

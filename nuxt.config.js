@@ -35,7 +35,8 @@ export default {
     '~/plugins/dialogs.js',
     '~/plugins/upload-component.js',
     '~/plugins/alerts.js',
-    '~/plugins/snackbars.js'
+    '~/plugins/snackbars.js',
+    '~/plugins/vueper.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
